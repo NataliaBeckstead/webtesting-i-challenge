@@ -16,6 +16,21 @@ describe('enchancer.js', () => {
             expect(succeed({enhancement: 20, durability: 70})).toEqual({enhancement: 20, durability: 70});
         })
     })
+    describe('.fail()', function() {
+        it("If the item's enhancement is less than 15, the durability of the item is decreased by 5", function() {
+            expect(fail({enhancement: 6, durability: 40})).toEqual({enhancement: 6, durability: 35});
+            expect(fail({enhancement: 14, durability: 70})).toEqual({enhancement: 14, durability: 65});
+            expect(fail({enhancement: 9, durability: 55})).toEqual({enhancement: 9, durability: 50});
+        })
+        it("If the item's enhancement is 15 or more, the durability of the item is decreased by 10", function() {
+            expect(fail({enhancement: 15, durability: 40})).toEqual({enhancement: 15, durability: 30});
+            expect(fail({enhancement: 16, durability: 70})).toEqual({enhancement: 16, durability: 60});
+        })
+        it("If the item's enhancement level is greater than 16, the enhancement level decreases by 1", function() {
+            expect(fail({enhancement: 17, durability: 40})).toEqual({enhancement: 16, durability: 30});
+            expect(fail({enhancement: 20, durability: 70})).toEqual({enhancement: 19, durability: 60});
+        })
+    })
     describe('.repair()', function() {
         it('should set durability to 100', function() {
             expect(repair({durability: 40})).toEqual({durability: 100});
