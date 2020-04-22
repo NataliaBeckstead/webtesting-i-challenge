@@ -37,4 +37,13 @@ describe('enchancer.js', () => {
             expect(repair({durability: 70})).toEqual({durability: 100});
         })
     })
+    describe('.get()', function() {
+        it('if the enhancement level is 0, the the name is not modified', function() {
+            expect(get({enhancement: 0, name: "Axe"})).toEqual({enhancement: 0, name: "Axe"});
+        })
+        it('if the enhancement level is greater than 0, change the name', function() {
+            expect(get({enhancement: 1, name: "Axe"})).toEqual({enhancement: 1, name: "[+1] Axe"});
+            expect(get({enhancement: 7, name: "Axe"})).toEqual({enhancement: 7, name: "[+7] Axe"});
+        })
+    })
 });
